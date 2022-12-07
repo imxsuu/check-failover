@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gedge-application
+  namespace: gedge-platform
+  labels:
+    run: gedge-application
+spec:
+  type: NodePort
+  ports:
+  - port: 9010
+    targetPort: 9010
+    name: http
+    nodePort: 32225
+    protocol: TCP
+  # - port: 443
+  #   name: https
+  #   protocol: TCP  
+  selector:
+    run: gedge-application

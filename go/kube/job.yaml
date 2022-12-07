@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gedge-go-app
+  namespace: gedge-platform
+spec:
+  template:
+    spec:
+      containers:
+      - name: gedge-go-app
+        image: 10.0.0.183:5000/gedge-go-server
+        resources:
+        limits:
+          memory: "100Mi"
+        requests:
+          memory: "100Mi"
+      restartPolicy: Never
+  backoffLimit: 0

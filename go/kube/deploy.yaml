@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gedge-go-app
+  namespace: gedge-platform
+  labels:
+    run: gedge-go-app
+spec:
+  type: NodePort
+  ports:
+  - port: 9010
+    targetPort: 9010
+    name: http
+    nodePort: 32225
+    protocol: TCP
+  # - port: 443
+  #   name: https
+  #   protocol: TCP  
+  selector:
+    run: gedge-go-app
+---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: gedge-go-app
+#   namespace: gedge-platform
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       run: gedge-go-app
+#   template:
+#     metadata:
+#       labels:
+#         run: gedge-go-app
+#     spec:
+#       imagePullSecrets:
+#         - name: regcred
+#       containers:
+#         - name: gedge-go-app
+#           image: 10.0.0.183:5000/gedge-go-server
+#           resources:
+#             limits:
+#               memory: "100Mi"
+#             requests:
+#               memory: "100Mi"
+#           imagePullPolicy: Never
+#           ports:
+#             - containerPort: 9010
+#               protocol: TCP
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gedge-go-app
+  namespace: gedge-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: gedge-go-app
+  template:
+    metadata:
+      labels:
+        run: gedge-go-app
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: gedge-go-app
+          image: 10.0.0.183:5000/gedge-go-server
+          resources:
+            limits:
+              memory: "100Mi"
+            requests:
+              memory: "100Mi"
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9010
+              protocol: TCP
+
+

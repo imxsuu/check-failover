@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gedge-nginx
+spec:
+  selector:
+    matchLabels:
+      run: gedge-nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: gedge-nginx
+    spec:
+      containers:
+      - name: gedge-nginx
+        image: nginx
+        ports:
+        - containerPort: 80

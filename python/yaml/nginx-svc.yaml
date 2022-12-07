@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gedge-nginx
+  labels:
+    run: gedge-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: gedge-nginx
